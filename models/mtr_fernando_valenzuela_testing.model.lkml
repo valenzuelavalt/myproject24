@@ -126,7 +126,7 @@ explore: orders {
 }
 
 explore: order_items {
-  fields: [ALL_FIELDS*, -order_items.test*]
+  fields: [ALL_FIELDS*, -order_items.average_sale_price]
   join: orders {
     type: left_outer
     sql_on: ${order_items.order_id} = ${orders.id} ;;

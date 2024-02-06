@@ -67,9 +67,6 @@ view: order_items {
     sql: ${sale_price} ;;  }
 
 
-  set: test {
-    fields: [average_sale_price]
-  }
 
   measure: count {
     type: count
