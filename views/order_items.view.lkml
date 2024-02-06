@@ -60,8 +60,17 @@ view: order_items {
     type: sum
     sql: ${sale_price} ;;  }
   measure: average_sale_price {
+    filters:[ phone: "-null",
+              phones: "-null",
+              inventory_item_id: "0"]
     type: average
     sql: ${sale_price} ;;  }
+
+
+  set: test {
+    fields: [average_sale_price]
+  }
+
   measure: count {
     type: count
     drill_fields: [id, orders.id, inventory_items.id]
