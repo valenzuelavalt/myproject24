@@ -124,7 +124,7 @@ explore: orders {
     relationship: many_to_one
   }
 }
-named_value_format: currency_0 {
+named_value_format: currencytest {
   value_format: "$#,##0"
   strict_value_format: yes
 }
