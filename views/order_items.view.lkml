@@ -3,7 +3,7 @@ view: order_items {
   # The sql_table_name parameter indicates the underlying database table
   # to be used for all fields in this view.
   sql_table_name: demo_db.order_items ;;
-  drill_fields: [id]
+
 
   # This primary key is the unique key for this table in the underlying database.
   # You need to define a primary key in a view in order to join to other views.
@@ -43,7 +43,7 @@ view: order_items {
 
   dimension_group: returned {
     type: time
-    timeframes: [raw, time, date, week, month, quarter, year]
+    timeframes: [raw, time, date,day_of_year, week, month, quarter, year]
     sql: ${TABLE}.returned_at ;;
   }
 
@@ -55,17 +55,32 @@ view: order_items {
   # A measure is a field that uses a SQL aggregate function. Here are defined sum and average
   # measures for this dimension, but you can also add measures of many different aggregates.
   # Click on the type parameter to see all the options in the Quick Help panel on the right.
-
   measure: total_sale_price {
+    value_format: "$#,##0.00"
     type: sum
-    sql: ${sale_price} ;;  }
-  measure: average_sale_price {
-    filters:[ phone: "-null",
-              phones: "-null",
-              inventory_item_id: "0"]
-    type: average
-    sql: ${sale_price} ;;  }
+    sql: ${sale_price} ;;
+    html:
+    {% if selector._parameter_value ==  "'dolar'"  %}
+       <span>{{ rendered_value }}</span>
+    {% elsif  selector._parameter_value ==  "'decimal'" %}
+       <span>{{ value | round: 2 }}</span>
+    {% endif %} ;;
 
+  }
+
+
+  parameter: selector {
+    type: string
+    description: "Used to select the format on visualization"
+    allowed_value: {
+      label: "decimal"
+      value: "decimal"
+    }
+    allowed_value: {
+      label: "dolar"
+      value: "dolar"
+    }
+  }
 
 
   measure: count {

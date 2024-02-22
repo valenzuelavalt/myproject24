@@ -124,9 +124,12 @@ explore: orders {
     relationship: many_to_one
   }
 }
+named_value_format: currency_0 {
+  value_format: "$#,##0"
+  strict_value_format: yes
+}
 
 explore: order_items {
-  fields: [ALL_FIELDS*, -order_items.average_sale_price]
   join: orders {
     type: left_outer
     sql_on: ${order_items.order_id} = ${orders.id} ;;
