@@ -4,6 +4,17 @@ view: billion_orders {
   # to be used for all fields in this view.
   sql_table_name: demo_db.billion_orders ;;
 
+  parameter: profile {
+    type: unquoted
+    allowed_value: {
+      label: "thelook"
+      value: "thelook"
+    }
+    allowed_value: {
+      label: "snowlooker"
+      value: "snowlooker"
+    }
+  }
   # No primary key is defined for this view. In order to join this view in an Explore,
   # define primary_key: yes on a dimension that has no repeated values.
 
@@ -41,4 +52,7 @@ view: billion_orders {
     type: count
     drill_fields: [orders.id]
   }
+
+
+
 }

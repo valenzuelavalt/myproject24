@@ -1,6 +1,5 @@
 # Define the database connection to be used for this model.
-connection: "thelook"
-
+connection:"thelook"
 # include all the views
 include: "/views/**/*.view.lkml"
 
